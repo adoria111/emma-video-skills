@@ -1,0 +1,4 @@
+interface:
+  display_name: "艾玛视频 · 口播参谋"
+  short_description: "从长分享中拆选题、组合相关问答、定位原话并检查口播内容的完整性"
+  default_prompt: "用 $koubo-advisor 从这些直播素材中拆出可以独立成片的选题。"
