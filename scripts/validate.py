@@ -1,15 +1,23 @@
 #!/usr/bin/env python3
 """Check package structure, local Markdown links and obvious private-file leaks."""
 from pathlib import Path
+import hashlib
 import re
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 EXPECTED = {"emma-video-workflow", "video-transcribe", "koubo-advisor",
             "video-edit-handoff", "xhs-double-photo-cover", "video-publish-pack"}
+# Only this explicitly approved visual reference may ship; keep the general
+# private-media check active and detect unintended replacements of the asset.
+APPROVED_MEDIA = {
+    "skills/xhs-double-photo-cover/references/approved-cover.png":
+        "5dd7af19973eb63907b45ce7fdbe8deb09e63204ea31d57d4c1ce6b4188306b2",
+}
 
 
 def validate(root: Path = ROOT) -> list[str]:
+    root = root.resolve()
     errors = []
     skill_dirs = {p.name for p in (root / "skills").iterdir() if p.is_dir()}
     if skill_dirs != EXPECTED:
@@ -39,7 +47,11 @@ def validate(root: Path = ROOT) -> list[str]:
         if not path.is_file():
             continue
         if path.suffix.lower() in {".mp4", ".mov", ".wav", ".mp3", ".png", ".jpg", ".jpeg", ".db"}:
-            errors.append(f"Unexpected private/media artifact: {relative}")
+            approved_hash = APPROVED_MEDIA.get(relative.as_posix())
+            if approved_hash is None:
+                errors.append(f"Unexpected private/media artifact: {relative}")
+            elif hashlib.sha256(path.read_bytes()).hexdigest() != approved_hash:
+                errors.append(f"Approved media content changed: {relative}")
         if path.name.startswith(".env"):
             errors.append(f"Environment file must not ship: {relative}")
         if path.suffix.lower() not in {".md", ".py", ".yaml", ".txt", ".yml"}:

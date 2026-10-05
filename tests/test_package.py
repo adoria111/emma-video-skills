@@ -1,5 +1,6 @@
 import importlib.util
 from pathlib import Path
+import shutil
 import tempfile
 import unittest
 
@@ -32,6 +33,26 @@ class PackageTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 installer.install(dest)
             self.assertEqual(marker.read_text(), "keep my private customization")
+
+    def test_cover_reference_survives_standalone_install(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            dest = Path(tmp) / "skills"
+            installer.install(dest, ["xhs-double-photo-cover"])
+            relative = Path("xhs-double-photo-cover/references/approved-cover.png")
+            self.assertEqual((dest / relative).read_bytes(), (ROOT / "skills" / relative).read_bytes())
+            self.assertTrue((dest / relative.parent / "visual-style.md").is_file())
+
+    def test_public_media_exception_does_not_allow_other_images(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            copy = Path(tmp) / "package"
+            shutil.copytree(ROOT, copy, ignore=shutil.ignore_patterns(".git", "__pycache__", ".venv"))
+            self.assertEqual(validator.validate(copy), [])
+            (copy / "private-photo.png").write_bytes(b"unapproved")
+            reference = copy / "skills/xhs-double-photo-cover/references/approved-cover.png"
+            reference.write_bytes(b"unapproved replacement")
+            errors = validator.validate(copy)
+            self.assertTrue(any("private-photo.png" in error for error in errors))
+            self.assertTrue(any("approved-cover.png" in error for error in errors))
 
     def test_replace_retains_recoverable_backup(self):
         with tempfile.TemporaryDirectory() as tmp:

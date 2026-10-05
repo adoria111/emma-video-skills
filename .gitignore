@@ -13,6 +13,8 @@ __pycache__/
 *.png
 *.jpg
 *.jpeg
+# Author-approved visual reference; all other private images remain excluded.
+!skills/xhs-double-photo-cover/references/approved-cover.png
 *.zip
 source/
 delivery/
