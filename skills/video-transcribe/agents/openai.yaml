@@ -1,4 +1,4 @@
 interface:
-  display_name: "艾玛视频 · 转写"
+  display_name: "矮马视频 · 转写"
   short_description: "复用匹配逐字稿或本地转写音视频，输出带时间的字幕初稿并核对术语"
   default_prompt: "用 $video-transcribe 为这段视频准备逐字稿和同步字幕初稿。"

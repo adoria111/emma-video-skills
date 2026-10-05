@@ -1,4 +1,4 @@
 interface:
-  display_name: "艾玛视频 · 发布文案"
+  display_name: "矮马视频 · 发布文案"
   short_description: "按最终成片写社媒正文、标题和章节目录，确保内容承诺与视频一致"
   default_prompt: "用 $video-publish-pack 根据最终成片生成可直接使用的发布正文和标题。"

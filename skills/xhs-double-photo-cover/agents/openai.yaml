@@ -1,4 +1,4 @@
 interface:
-  display_name: "艾玛视频 · 双图封面"
+  display_name: "矮马视频 · 双图封面"
   short_description: "从对应成片取帧，制作上下同图、整体暗底、白色宋体大字的系列封面"
   default_prompt: "用 $xhs-double-photo-cover 根据这条最终成片做一张上下双图封面。"

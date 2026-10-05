@@ -1,4 +1,4 @@
 interface:
-  display_name: "艾玛视频 · 总入口"
+  display_name: "矮马视频 · 总入口"
   short_description: "从直播切片和逐字稿到剪辑、同步字幕、封面与发布文案的连续交付"
   default_prompt: "用 $emma-video-workflow 把我提供的录播整理成可发布的视频及配套材料。"

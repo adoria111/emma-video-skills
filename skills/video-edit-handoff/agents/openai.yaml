@@ -1,4 +1,4 @@
 interface:
-  display_name: "艾玛视频 · 剪辑衔接"
+  display_name: "矮马视频 · 剪辑衔接"
   short_description: "对接已有剪辑工具，处理去水词后的字幕错位并导出最新检查版本"
   default_prompt: "用 $video-edit-handoff 按我最新剪辑的口播重新校准字幕和问题题签。"
