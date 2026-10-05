@@ -41,6 +41,8 @@ class PackageTests(unittest.TestCase):
             relative = Path("xhs-double-photo-cover/references/approved-cover.png")
             self.assertEqual((dest / relative).read_bytes(), (ROOT / "skills" / relative).read_bytes())
             self.assertTrue((dest / relative.parent / "visual-style.md").is_file())
+            self.assertTrue((dest / relative.parent / "executable-template.md").is_file())
+            self.assertTrue((dest / "xhs-double-photo-cover/scripts/render_cover.py").is_file())
 
     def test_public_media_exception_does_not_allow_other_images(self):
         with tempfile.TemporaryDirectory() as tmp:

@@ -105,6 +105,8 @@ python3 scripts/install.py --dest /path/to/skills
 
 封面技能附带 [已确认的视觉参考与排版说明](skills/xhs-double-photo-cover/references/visual-style.md)：先围绕人物裁出完整头肩，再做双图；封面短句与发布标题分开；交付前按手机缩略图大小检查。参考图只用于学习样式，新封面使用你自己的素材。
 
+选择本地确定性排版时，还可使用 [可执行封面模板](skills/xhs-double-photo-cover/references/executable-template.md)：先出无字裁切预览，再出封面和手机缩略图；自动检查文字越界与标注的五官遮挡。需要 Pillow 和可用字体，安装 Skills 不会自动安装这些依赖。选帧、字体与最终观感仍须实际看图判断。
+
 口播精剪附带 [重复、口误、口癖与停顿的处理规则](skills/video-edit-handoff/references/natural-speech-editing.md)：先按内容理解顺序，再清理冗余；重录选准确完整的一版，保留必要强调、呼吸和情绪，检查剪切衔接并同步字幕。
 
 只要其中一项，就直接说“这次只做字幕／封面／标题”。只给逐字稿也能做选题、剪辑建议和文字逻辑分析；实际转写、剪视频和做封面，需要当前 AI 有对应工具。剪辑可选 ChatCut、剪映等，见 [工具说明](docs/dependencies.md)。写好发布文案不等于已经发到平台。
